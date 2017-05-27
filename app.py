@@ -29,7 +29,7 @@ def callback():
             result_list = list(map(answer, EM.answerEntry()))
     return "OK", 200
 
-def answer(answer_info):
+def answer(answer_details):
     params  = {"access_token": os.environ["PAT"]}
     headers = {"Content-Type": "application/json"}
     data = JSONify(answer_details)
