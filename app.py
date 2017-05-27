@@ -63,3 +63,7 @@ def JSONify(answer_details):
                 }
         data['message']['quick_replies'] = generateQuickReplies("options")
         return json.dumps(data)
+
+def log(text):
+    print(str(text))
+    sys.stdout.flush()
