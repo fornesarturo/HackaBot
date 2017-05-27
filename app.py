@@ -13,6 +13,7 @@ def verify():
         if not request.args.get("hub.verify_token") == "veryfy_@me":
             return "Verification token mismatch", 403
         return request.args["hub.challenge"], 200
+    return 200
 
 @app.route('/', methods=['POST'])
 def callback():
@@ -22,4 +23,5 @@ def callback():
     if data["object"] == "page":
         for entry in data["entry"]:
             #Do something
+            print(entry)
     return "OK", 200
