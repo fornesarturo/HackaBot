@@ -50,11 +50,20 @@ def generateQuickReplies(quick_type):
                 "payload":"PAYLOAD_HELP"
              }
         ]
+    if quick_type == 'welcome':
+        return [
+            {
+                "content_type":"text",
+                "title":"Help",
+                "payload":"PAYLOAD_HELP"
+             }
+        ]
     return []
 
 def JSONify(answer_details):
     _type = answer_details['type']
     sender_id = answer_details['sender']
+    _quick = answer_details['quick']
 
     if "text" in _type:
         message_answer = answer_details['text']
@@ -62,7 +71,7 @@ def JSONify(answer_details):
                 "recipient":{"id":sender_id},
                 "message":{"text":message_answer}
                 }
-        data['message']['quick_replies'] = generateQuickReplies("options")
+        data['message']['quick_replies'] = generateQuickReplies(_quick)
         return json.dumps(data)
 
 def log(text):

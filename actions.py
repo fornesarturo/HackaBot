@@ -1,7 +1,9 @@
 def generateAnswer(text):
     if "hola" in text.lower():
-        return "Hola, gusto en hablar contigo, aunque en realidad esté hardcodeado","text"
-    return "Dame tu INE, anda, confía","text"
+        return "Hola, gusto en hablar contigo, aunque en realidad esté hardcodeado","text","options"
+    if "get started" in text.lower():
+        return "Hola, soy un Bot que procesa tus tramites, para proseguir haz click en algún botón o envía un mensaje","text","welcome"
+    return "Dame tu INE, anda, confía","text","options"
 
 class EntryManager(object):
     def __init__(self,entry):
@@ -15,13 +17,14 @@ class EntryManager(object):
             if event.get("message"):
                 sender = event['sender']['id']
                 text = event['message'].get('text')
+                if mevent['message'].get('quick_reply'):
+                    payload = mevent['message']['quick_reply']['payload']
+                    answer,_type,quick_reply = generateResponse(payload,sender)
                 if not text:
-                    answer,_type = 'Nice ' + str(event['message']['attachments'][0]['type']),'text'
-
+                    answer,_type,quick_reply = 'Nice ' + str(event['message']['attachments'][0]['type']),'text','options'
                 else:
-                    answer,_type = generateAnswer(text)
-
+                    answer,_type,quick_reply = generateAnswer(text)
                 if "text" in _type:
-                    return {'sender':sender,'user_text':text,'text':answer,'type':_type}
+                    return {'sender':sender,'user_text':text,'text':answer,'type':_type,'quick':quick_reply}
         answer_list = map(getAnswer, self.message_list)
         return answer_list
