@@ -23,6 +23,7 @@ def callback():
     data = request.get_json()
     if data == None:
         return request.form
+    log(data)
     if data["object"] == "page":
         for entry in data["entry"]:
             EM = EntryManager(entry)
