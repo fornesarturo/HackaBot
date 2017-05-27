@@ -4,6 +4,7 @@ def generateAnswer(text):
     if "GET_STARTED_PAYLOAD" in text:
         return "Hola, soy un Bot que procesa tus tramites, para proseguir haz click en algún botón o envía un mensaje","text","welcome"
     if "PAYLOAD_HELP" in text:
+        return "Hola, soy un Bot que procesa tus tramites, para proseguir haz click en algún botón o envía un mensaje","text","welcome"
     return "Dame tu INE, anda, confía","text","options"
 
 class EntryManager(object):
