@@ -17,8 +17,8 @@ class EntryManager(object):
             if event.get("message"):
                 sender = event['sender']['id']
                 text = event['message'].get('text')
-                if mevent['message'].get('quick_reply'):
-                    payload = mevent['message']['quick_reply']['payload']
+                if event['message'].get('quick_reply'):
+                    payload = event['message']['quick_reply']['payload']
                     answer,_type,quick_reply = generateResponse(payload,sender)
                 if not text:
                     answer,_type,quick_reply = 'Nice ' + str(event['message']['attachments'][0]['type']),'text','options'
