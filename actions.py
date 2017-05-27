@@ -29,7 +29,8 @@ class EntryManager(object):
                 if "text" in _type:
                     return {'sender':sender,'user_text':text,'text':answer,'type':_type,'quick':quick_reply}
             if event.get("postback"):
-                payload = event["postback"]["payload"]
+                payload = event['postback']['payload']
+                sender = event['sender']['id']
                 answer,_type,quick_reply = generateAnswer(payload,sender)
                 return {'sender':sender,'user_text':payload,'text':answer,'type':_type,'quick':quick_reply}
         answer_list = map(getAnswer, self.message_list)
