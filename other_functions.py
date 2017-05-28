@@ -69,7 +69,7 @@ def getUserInfo(sender):
     return temp
 
 # %% Image text
-def getImageText():
+def getImageText(_url):
     # add api to image test
     return "" 
 # %% Identify INE 
@@ -85,7 +85,7 @@ def isThisAnINE(img_url):
 
 def sendIne2DB(sender,_url):  
     facebook_data = getUserInfo(sender)
-    image_text    = getImageText()    
+    image_text    = getImageText(_url)    
     post_url = "http://35.162.69.59:8080/api/ine" 
     ine = {"facebookID":str(sender),
            "fName":"",
