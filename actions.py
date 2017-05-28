@@ -18,10 +18,10 @@ def generateAnswer(text):
             apellido_paterno = str(decoded["message"]["lName"])
             apellido_materno = str(decoded["message"]["mName"])
             curp = str(decoded["message"]["curp"])
-            año=str(año[04])+str(año[05])
-            mes=str(año[06])+str(año[07])
-            dia=str(año[08])+str(año[09])
-            fecha="19"+año+"/"+mes+"/"+dia
+            year=str(year[4])+str(year[5])
+            mes=str(year[6])+str(year[7])
+            dia=str(year[8])+str(year[9])
+            fecha="19"+year+"/"+mes+"/"+dia
             urlapi = "https://jfhe88-rfc-generator-mexico.p.mashape.com/rest1/rfc/get?apellido_materno="+ apellido_materno + "&apellido_paterno="+apellido_paterno+"&fecha="+fecha+"&nombre="+nombre+"&solo_homoclave=0"
             response = unirest.get(urlapi,
                 headers={
