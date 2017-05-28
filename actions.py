@@ -27,7 +27,7 @@ class EntryManager(object):
                 if not text:
                     attachment_type =  str(event['message']['attachments'][0]['type'])
                     if attachment_type == "image":
-                        if isThisAnINEs():
+                        if isThisAnINE():
                             _url = event["message"]["attachments"][0]["payload"]["url"]
                             answer,_type,quick_reply = str(getUserInfo(sender))+str(_url),'text','options'
                         else:
