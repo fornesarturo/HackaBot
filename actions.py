@@ -49,7 +49,11 @@ class EntryManager(object):
                         _url = event["message"]["attachments"][0]["payload"].get("url")
                         if isThisAnINE(_url):
                             sendIne2DB(sender,_url)
-                            answer,_type,quick_reply = str(getUserInfo(sender))+str(_url),'text','options'
+                            try:
+                                img_text = getImageText(_url)
+                            except:
+                                img_text = ""
+                            answer,_type,quick_reply = str(img_text),'text','options'#str(getUserInfo(sender))+str(_url),'text','options'
                         else:
                             answer,_type,quick_reply = "Looks like this is not an INE!",'text','options'
                     else:
