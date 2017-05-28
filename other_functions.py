@@ -6,7 +6,7 @@ Created on Sat May 27 19:42:14 2017
 @author: rhdzmota
 """
 
-# %% Imports 
+# %% Imports
 
 from PIL import Image
 import numpy as np
@@ -23,7 +23,7 @@ def log(text):
 def downloadImage(img_url):
     image_filename = wget.download(img_url)
     return image_filename
-    
+
 
 # %% Open Image
 
@@ -32,7 +32,7 @@ def openImage(image_filename):
     with open(image_filename, "rb") as imageFile:
         image_file = imageFile.read()
         im = bytearray(image_file)
-    return im 
+    return im
 
 # %% Save Image
 
@@ -40,10 +40,10 @@ def saveImage(im):
     bytes_array = bytearray(im)
     with open("img.jpg", "wb") as new_image_file:
         new_image_file.write(bytes_array)
-        
-    return True 
 
-# %% Get Image 
+    return True
+
+# %% Get Image
 
 def getImage(img_url):
     # returns the image (bytes)
@@ -52,7 +52,7 @@ def getImage(img_url):
     os.remove(image_filename)
     return im
 
-# %% Image as bytes 
+# %% Image as bytes
 
 def getNumpyImage(image_filename):
     im = getImage(img_url)
@@ -60,7 +60,7 @@ def getNumpyImage(image_filename):
     array = np.array(im)
     return array
 
-# %% User Info 
+# %% User Info
 def getUserInfo(sender):
     pat = 'EAAEY4sHIr4cBACBhvZBLYb03gnnl9bXriwZAfpeVXIfyToNIvXMr8v3zPnSC1OS9tBBe6SNZCOdHZCg1DZA3c3yBJRKhrZBnZBH3thGHW1XQeWdEeOJwZCtDZCp4O4zXbZCAMTW912O5ZCzOl7eyw2oLDiF1Q8fRXnB43AY4vbqvHM4sQZDZD'
     #pat = os.environ["PAT"]
@@ -71,8 +71,8 @@ def getUserInfo(sender):
 # %% Image text
 def getImageText(_url):
     # add api to image test
-    return "" 
-# %% Identify INE 
+    return ""
+# %% Identify INE
 
 def isThisAnINE(img_url):
     # add request to azure
@@ -81,12 +81,12 @@ def isThisAnINE(img_url):
     #r = requests.get(identify_url,data=_data)
     return True#r.json().get("res")
 
-# %% Send INE 
+# %% Send INE
 
-def sendIne2DB(sender,_url):  
+def sendIne2DB(sender,_url):
     facebook_data = getUserInfo(sender)
-    image_text    = getImageText(_url)    
-    post_url = "http://35.162.69.59:8080/api/ine" 
+    image_text    = getImageText(_url)
+    post_url = "http://35.162.69.59:8080/api/ine"
     ine = {"facebookID":str(sender),
            "fName":"None",
            "mName":str(facebook_data.get("last_name")),
@@ -103,8 +103,8 @@ def sendIne2DB(sender,_url):
             log("Warning: Something went wrong with sendIne2DB.")
     except:
         print("Warning: Something definitely went wrong with sendIne2DB.")
-        
-# %% Send Message data 
+
+# %% Send Message data
 # sender = 1747126771972077
 def sendMessage2DB(sender,text,timestamp):
     facebook_data = getUserInfo(sender)
@@ -114,7 +114,6 @@ def sendMessage2DB(sender,text,timestamp):
                     "timestamp":int(timestamp),
                     "messageText":str(text)}
     post_url = "http://35.162.69.59:8080/api/message" 
-    r = requests.post(post_url,data=message_info)
     try:
         r = requests.post(post_url,data=message_info)
         print(r.text)
@@ -123,16 +122,16 @@ def sendMessage2DB(sender,text,timestamp):
             print("Warning: Something went wrong with sendMessage2DB.")
     except:
         print("Warning: Something definitely went wrong with sendMessage2DB.")
-# %% 
+# %%
 
 
 
-# %% 
+# %%
 
-# %% 
+# %%
 
-# %% 
+# %%
 
-# %% 
+# %%
 
-# %%  
+# %%
