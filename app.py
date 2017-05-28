@@ -35,7 +35,6 @@ def callback():
                     if message["message"].get("quick_reply"):
                         EM = EntryManager(entry)
                         result_list = list(map(answer, EM.answerEntry()))
-                        continue
                     elif message["message"].get("text"):
                         text = message["message"]["text"]
                         sender = message["sender"]["id"]
@@ -43,7 +42,6 @@ def callback():
                         log('Yay, got Wit.ai response: ' + str(resp))
                         intent_value = resp['entities']['intent'][0]['value']
                         fb_message(sender,intent_value)
-                        continue
                     continue
                 elif message.get("postback"):
                     EM = EntryManager(entry)

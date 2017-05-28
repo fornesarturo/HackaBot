@@ -5,9 +5,9 @@ def generateAnswer(text):
         return "Hola, gusto en hablar contigo, aunque en realidad esté hardcodeado","text","options"
     if "GET_STARTED_PAYLOAD" in text:
         return "Hola, soy un Bot que procesa tus tramites, para proseguir haz click en algún botón o envía un mensaje","text","welcome"
-    if "PAYLOAD_HELP" in text:
+    if "PAYLOAD_HELP" in text or "help" in text.lower():
         return "Hola, soy un Bot que procesa tus tramites, para proseguir haz click en algún botón o envía un mensaje","text","welcome"
-    if "PAYLOAD_TRAMITE" in text:
+    if "PAYLOAD_TRAMITE" in text or "trámite" in text.lower() or "tramite" in text.lower():
         return "Dame tu INE, anda, confía","text","options"
     return "Oops, no te entendí","text","options"
 
@@ -26,7 +26,7 @@ class EntryManager(object):
                 if event['message'].get('quick_reply'):
                     payload = event['message']['quick_reply']['payload']
                     answer,_type,quick_reply = generateAnswer(payload)
-                if not text:
+                elif not text:
                     attachment_type =  str(event['message']['attachments'][0]['type'])
                     if attachment_type == "image":
                         if isThisAnINE():
