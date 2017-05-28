@@ -8,7 +8,7 @@ var IneSchema = new Schema({
     address: {type: String, required: false},
     ineID: {type: String, required: true},
     curp: {type: String, required: true},
-    user: {type: String, required: true},
+    user: {type: String, required: true}
 });
 
 module.exports = mongoose.model('Ine', IneSchema);
