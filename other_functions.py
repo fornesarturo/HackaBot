@@ -76,10 +76,10 @@ def getImageText(_url):
 
 def isThisAnINE(img_url):
     # add request to azure
-    identify_url = ""
-    _data = {"img_url":img_url}
-    #r = requests.get(identify_url,data=_data)
-    return True#r.json().get("res")
+    identify_url = "http://gerardo8170.cloudapp.net:8080/identifyIne"
+    _data = {"img":img_url}
+    r = requests.get(identify_url,json=_data)
+    return eval(r.text)
 
 # %% Send INE
 
@@ -113,7 +113,7 @@ def sendMessage2DB(sender,text,timestamp):
                     "facebookID":str(sender),
                     "timestamp":int(timestamp),
                     "messageText":str(text)}
-    post_url = "http://35.162.69.59:8080/api/message" 
+    post_url = "http://35.162.69.59:8080/api/message"
     try:
         r = requests.post(post_url,data=message_info)
         print(r.text)
