@@ -39,7 +39,9 @@ def callback():
                     elif message["message"].get("text"):
                         text = message["message"]["text"]
                         sender = message["sender"]["id"]
-                        client.run_actions(session_id=sender,message=text)
+                        resp = client.message(text)
+                        log('Yay, got Wit.ai response: ' + str(resp))
+                        fb_message(sender,text)
                         continue
             EM = EntryManager(entry)
             result_list = list(map(answer, EM.answerEntry()))
@@ -103,18 +105,8 @@ def log(text):
     print(str(text))
     sys.stdout.flush()
 
-def send(request, response):
-    fb_id = request['session_id']
-    text = response['text']
-    fb_message(fb_id, text)
-
-# Setup Actions
-actions = {
-    'send': send
-}
-
 # Setup Wit Client
-client = Wit(access_token=WIT_TOKEN, actions=actions)
+client = Wit(access_token=WIT_TOKEN)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
