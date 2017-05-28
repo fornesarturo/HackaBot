@@ -42,9 +42,12 @@ def callback():
                             resp = client.message(text)
                             log('Yay, got Wit.ai response: ' + str(resp))
                             intent_value = resp['entities']['intent'][0]['value']
+                            fb_message(sender,intent_value)
                         except:
+                            EM = EntryManager(entry)
                             intent_value = generateAlternativeIntent(text)
-                        fb_message(sender,intent_value)
+                            result_list = list(map(answer, EM.answerEntry()))
+                        #fb_message(sender,intent_value)
                     continue
                 elif message.get("postback"):
                     EM = EntryManager(entry)
