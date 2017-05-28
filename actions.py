@@ -12,7 +12,7 @@ def generateAnswer(text,sender):
     if "PAYLOAD_RFC" in text or "rfc" in text.lower():
         r=requests.get("http://35.162.69.59:8080/api/ine/"+sender)
         if (r is not None):
-            decoded = eval(r.text)
+            decoded = r.json()
             #decoded = json.loads(datamagic)
             nombre = str(decoded["message"]["fName"])
             apellido_paterno = str(decoded["message"]["lName"])
