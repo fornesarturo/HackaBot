@@ -92,12 +92,11 @@ def getImageText(_url):
     _data = {"img":_url}
     log(text_url)
     try:
-        if True:
-            r = requests.get(text_url, params=_data)
-            if("<!DOCTYPE HTML" in r.text):
-                log("This was an error in request")
-                return False
-            return r.text
+        r = requests.get(text_url, params=_data)
+        if("<!DOCTYPE HTML" in r.text):
+            log("This was an error in request")
+            return False
+        return r.text
     except:
         return False
 
