@@ -100,6 +100,7 @@ def sendIne2DB(sender,_url):
         log(r.text)
         if not r.ok:
             print("Warning: Something went wrong with sendIne2DB.")
+            log("Warning: Something went wrong with sendIne2DB.")
     except:
         print("Warning: Something definitely went wrong with sendIne2DB.")
         
