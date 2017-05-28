@@ -26,7 +26,11 @@ print("alright")
 # %% 
 
 # %% 
-
+def getLastMessage(sender):
+    last_message = "http://35.162.69.59:8080/api/message/"+str("MMP")
+    r = requests.get(last_message)
+    return r 
+    
 # %% 
 
 # %% 

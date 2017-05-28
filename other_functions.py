@@ -114,7 +114,7 @@ def sendMessage2DB(sender,text,timestamp):
                     "timestamp":int(timestamp),
                     "messageText":str(text)}
     post_url = "http://35.162.69.59:8080/api/message" 
-    r = requests.get(post_url,data=message_info)
+    r = requests.post(post_url,data=message_info)
     #try:
     #    r = requests.post(post_url,data=message_info)
     #    print(r.text)
