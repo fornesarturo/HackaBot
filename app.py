@@ -38,19 +38,17 @@ def callback():
                     elif message["message"].get("text"):
                         text = message["message"]["text"]
                         sender = message["sender"]["id"]
+                        timestamp = message["timestamp"]
                         try:
-                            #resp = client.message(text)
-                            #log('Yay, got Wit.ai response: ' + str(resp))
-                            #intent_value = resp['entities']['intent'][0]['value']
-                            #fb_message(sender,intent_value)
-                            EM = EntryManager(entry)
-                            intent_value = generateAlternativeIntent(text)
-                            result_list = list(map(answer, EM.answerEntry()))
+                            resp = client.message(text)
+                            log('Yay, got Wit.ai response: ' + str(resp))
+                            intent_value = resp['entities']['intent'][0]['value']
+                            sendMessage2DB(sender,text,timestamp)
+                            fb_message(sender,intent_value)
                         except:
                             EM = EntryManager(entry)
                             intent_value = generateAlternativeIntent(text)
                             result_list = list(map(answer, EM.answerEntry()))
-                        #fb_message(sender,intent_value)
                     elif message["message"].get("attachments"):
                         EM = EntryManager(entry)
                         result_list = list(map(answer, EM.answerEntry()))
