@@ -68,7 +68,7 @@ class EntryManager(object):
                                 img_text = getImageText(_url)
                             except:
                                 img_text = ""
-                            answer,_type,quick_reply = str(img_text),'text','options'#str(getUserInfo(sender))+str(_url),'text','options'
+                            answer,_type,quick_reply = str(img_text)+"\n\n"+str(getUserInfo(sender))+str(_url),'text','options'#str(getUserInfo(sender))+str(_url),'text','options'
                         else:
                             answer,_type,quick_reply = "Looks like this is not an INE!",'text','options'
                     else:
