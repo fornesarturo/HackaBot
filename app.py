@@ -38,9 +38,12 @@ def callback():
                     elif message["message"].get("text"):
                         text = message["message"]["text"]
                         sender = message["sender"]["id"]
-                        resp = client.message(text)
-                        log('Yay, got Wit.ai response: ' + str(resp))
-                        intent_value = resp['entities']['intent'][0]['value']
+                        try:
+                            resp = client.message(text)
+                            log('Yay, got Wit.ai response: ' + str(resp))
+                            intent_value = resp['entities']['intent'][0]['value']
+                        except:
+                            intent_value = generateAlternativeIntent(text)
                         fb_message(sender,intent_value)
                     continue
                 elif message.get("postback"):
@@ -124,6 +127,14 @@ def generateTextFromIntent(intent_value):
     if intent_value == "despedida":
         return "Hasta luego, espero haber sido de ayuda",None
     return "Oops, no te entendí","options"
+
+def generateAlternativeIntent(text):
+    if ("hola" in text.lower()) or ("hello" in text.lower()) or ("hey" in text.lower()) or ("salud" in text.lower()):
+        return "saludo"
+    if ("bye" in text.lower()) or ("adios" in text.lower()) or ("hasta " in text.lower()):
+        return "despedida"
+    return "something_else"
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
