@@ -14,6 +14,7 @@ import requests
 import wget
 import os
 import sys
+import json
 
 def log(text):
     print(str(text))
@@ -81,7 +82,7 @@ def isThisAnINE(img_url):
     identify_url = "http://gerardo8170.cloudapp.net:8080/identifyIne"
     _data = {"img":img_url}
     log(img_url)
-    r = requests.get(identify_url,data=_data,headers=headers)
+    r = requests.get(identify_url,data=json.dumps(_data),headers=headers)
     if("<!DOCTYPE HTML" in r.text):
         log("This was an error in request")
         return False
