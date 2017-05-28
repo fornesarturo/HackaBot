@@ -37,7 +37,7 @@ def generateAnswer(text,sender):
                 magia = str(decoded["data"]["rfc"])
                 return "Tu RFC es "+magia,"text","options"
             except:
-                return "No tenemos tus datos! curp={}".format(curp),"text","options"
+                return "No tenemos tus datos!","text","options"
         else:
             return "Por favor oprime primero en trámite","text","options"
     return "Oops, no te entendí","text","options"
