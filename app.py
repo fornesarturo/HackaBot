@@ -97,7 +97,12 @@ def generateQuickReplies(quick_type):
                  "content_type":"text",
                  "title":"Trámite",
                  "payload":"PAYLOAD_TRAMITE"
-              }
+              },
+              {
+                  "content_type":"text",
+                  "title":"RFC",
+                  "payload":"PAYLOAD_RFC"
+               }
         ]
     if quick_type == 'welcome':
         return [

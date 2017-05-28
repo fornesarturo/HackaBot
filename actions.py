@@ -4,13 +4,27 @@ def generateAnswer(text):
     if "hola" in text.lower():
         return "Hola, gusto en hablar contigo, aunque en realidad esté hardcodeado","text","options"
     if "GET_STARTED_PAYLOAD" in text:
-        return "Hola, soy un Bot que procesa tus tramites, para proseguir haz click en algún botón o envía un mensaje","text","welcome"
+        return "Hola, soy un Bot que procesa tus tramites, para proseguir haz click en algún botón o envía un mensaje","text","options"
     if "PAYLOAD_HELP" in text or "help" in text.lower():
-        return "Hola, soy un Bot que procesa tus tramites, para proseguir haz click en algún botón o envía un mensaje","text","welcome"
+        return "Hola, soy un Bot que procesa tus tramites, para proseguir haz click en algún botón o envía un mensaje","text","options"
     if "PAYLOAD_TRAMITE" in text or "trámite" in text.lower() or "tramite" in text.lower():
         return "Dame tu INE, anda, confía","text","options"
+    if "PAYLOAD_RFC" in text or "rfc" in text.lower():
+        #check if user is registered, if yes the continues to search for RFC. If not ask to click on trámite
+        if (False):
+            urlapi = "https://jfhe88-rfc-generator-mexico.p.mashape.com/rest1/rfc/get?apellido_materno="+ apellido_materno + "&apellido_paterno="+apellido_paterno+"&fecha="+fecha+"&nombre="+nombre+"&solo_homoclave=0"
+            response = unirest.get(urlapi,
+                headers={
+                    "X-Mashape-Key": "frrZzTz5DRmshqCacX6WoXCV5CA3p1w4zQyjsnXNx21g4BiCEd",
+                    "Accept": "application/json"
+                    })
+            data_string = json.dumps(response)
+            decoded = json.loads(data_string)
+            magia = str(decoded["data"]["rfc"])
+            return "Tu RFC es "+magia,"text","options"
+        else:
+            return "Por favor oprime primero en trámite","text","options"
     return "Oops, no te entendí","text","options"
-
 
 class EntryManager(object):
     def __init__(self,entry):
@@ -33,8 +47,8 @@ class EntryManager(object):
                 elif not text:
                     attachment_type =  str(event['message']['attachments'][0]['type'])
                     if attachment_type == "image":
-                        if isThisAnINE():
-                            _url = event["message"]["attachments"][0]["payload"]["url"]
+                        _url = event["message"]["attachments"][0]["payload"].get("url")
+                        if isThisAnINE(_url):
                             sendIne2DB(sender,_url)
                             answer,_type,quick_reply = str(getUserInfo(sender))+str(_url),'text','options'
                         else:
@@ -53,7 +67,6 @@ class EntryManager(object):
         answer_list = map(getAnswer, self.message_list)
         print("------------------ THIS 1 ------------------")
         return answer_list
-
 
 def log(text):
     print(str(text))
