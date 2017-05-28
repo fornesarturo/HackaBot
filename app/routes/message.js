@@ -53,7 +53,23 @@ router.route('/message')
             }
         })
     })
+
+router.route('/message/:facebookID')
     .get(function(req, res) {
-        // TODO: Get last message
+        function callback(data) {
+            console.log("GET IN MESSAGE");
+            res.send({'code': 1, 'message': data});
+        }
+
+        User.findOne({'facebookID': req.params.facebookID}, function(err, user) {
+            if (err) {
+                console.log("ERROR: " + err);
+                return;
+            }
+            console.log(user);
+            Message.find({'user': user['_id'].toString()}).sort('-timestamp').exec(function(err, messages) {
+                callback(messages[0]);
+            });
+        })
     })
 module.exports = router;
