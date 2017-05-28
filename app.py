@@ -39,10 +39,13 @@ def callback():
                         text = message["message"]["text"]
                         sender = message["sender"]["id"]
                         try:
-                            resp = client.message(text)
-                            log('Yay, got Wit.ai response: ' + str(resp))
-                            intent_value = resp['entities']['intent'][0]['value']
-                            fb_message(sender,intent_value)
+                            #resp = client.message(text)
+                            #log('Yay, got Wit.ai response: ' + str(resp))
+                            #intent_value = resp['entities']['intent'][0]['value']
+                            #fb_message(sender,intent_value)
+                            EM = EntryManager(entry)
+                            intent_value = generateAlternativeIntent(text)
+                            result_list = list(map(answer, EM.answerEntry()))
                         except:
                             EM = EntryManager(entry)
                             intent_value = generateAlternativeIntent(text)
