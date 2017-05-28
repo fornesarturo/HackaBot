@@ -40,7 +40,7 @@ router.route('/ine/:facebookID')
             res.send({'code': 1, 'message': data});
         }
 
-        User.findOne({'facebookID': req.params.facebookID}, function(err, user) {
+        User.findOne({'facebookID': req.params.facebookID}).sort('-_id').exec(function(err, user) {
             if (err) {
                 console.log("ERROR: " + err);
                 return;
@@ -53,7 +53,7 @@ router.route('/ine/:facebookID')
                     callback(null);
                 }
             });
-        })
+        });
     })
 
 module.exports = router;
