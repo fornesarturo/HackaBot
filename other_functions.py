@@ -80,7 +80,7 @@ def isThisAnINE():
 def sendIne2DB(sender,_url):  
     facebook_data = getUserInfo(sender)
     image_text    = getImageText()    
-    post_url = "http://187.162.211.255:8080/api/ine" 
+    post_url = "http://187.162.211.225:8080/api/ine" 
     ine = {"facebookID":str(sender),
            "fName":"",
            "mName":str(facebook_data.get("last_name")),
@@ -96,7 +96,7 @@ def sendIne2DB(sender,_url):
         print("Warning: Something definitely went wrong with sendIne2DB.")
         
 # %% Send Message data 
-# sender = 1939046243044035
+# sender = 1747126771972077
 def sendMessage2DB(sender,text,timestamp):
     facebook_data = getUserInfo(sender)
     message_info = {"name":str(facebook_data.get("first_name")),
@@ -104,7 +104,7 @@ def sendMessage2DB(sender,text,timestamp):
                     "facebookID":str(sender),
                     "timestamp":int(timestamp),
                     "messageText":str(text)}
-    post_url = "http://187.162.211.255:8080/api/message" 
+    post_url = "http://187.162.211.225:8080/api/message" 
     try:
         r = requests.post(post_url,data=message_info)
         if not r.ok:
