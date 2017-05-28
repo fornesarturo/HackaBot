@@ -90,6 +90,7 @@ def sendIne2DB(sender,_url):
            "curp":""}
     try:
         r = requests.post(post_url,data=ine)
+        print(r.text)
         if not r.ok:
             print("Warning: Something went wrong with sendIne2DB.")
     except:
@@ -107,6 +108,7 @@ def sendMessage2DB(sender,text,timestamp):
     post_url = "http://187.162.211.225:8080/api/message" 
     try:
         r = requests.post(post_url,data=message_info)
+        print(r.text)
         if not r.ok:
             print("Warning: Something went wrong with sendMessage2DB.")
     except:
