@@ -78,11 +78,10 @@ def getImageText(_url):
 
 def isThisAnINE(img_url):
     # add request to azure
-    headers = {"Content-Type": "application/json"}
     identify_url = "http://gerardo8170.cloudapp.net:8080/identifyIne"
     _data = {"img":img_url}
     log(img_url)
-    r = requests.get(identify_url,data=json.dumps(_data),headers=headers)
+    r = requests.get(identify_url + "?img=" + img_url)
     if("<!DOCTYPE HTML" in r.text):
         log("This was an error in request")
         return False
