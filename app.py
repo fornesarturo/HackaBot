@@ -45,6 +45,10 @@ def callback():
                         fb_message(sender,intent_value)
                         continue
                     continue
+                elif message.get("postback"):
+                    EM = EntryManager(entry)
+                    result_list = list(map(answer, EM.answerEntry()))
+                    continue
     return "OK", 200
 
 def answer(answer_details):
