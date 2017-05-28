@@ -14,12 +14,13 @@ def generateAnswer(text,sender):
         if (r is not None):
             decoded = r.json()
             #decoded = json.loads(datamagic)
-            nombre = str(decoded["message"]["fName"])
-            apellido_paterno = str(decoded["message"]["lName"])
-            apellido_materno = str(decoded["message"]["mName"])
-            curp = str(decoded["message"]["curp"])
-            log(curp)
             try:
+                nombre = str(decoded["message"]["fName"])
+                apellido_paterno = str(decoded["message"]["lName"])
+                apellido_materno = str(decoded["message"]["mName"])
+                curp = str(decoded["message"]["curp"])
+                log(curp)
+
                 year=curp[4]+curp[5]
                 mes=curp[6]+curp[7]
                 dia=curp[8]+curp[9]
@@ -35,7 +36,7 @@ def generateAnswer(text,sender):
                 log(decoded)
                 magia = str(decoded["data"]["rfc"])
                 return "Tu RFC es "+magia,"text","options"
-            except: 
+            except:
                 return "No tenemos tus datos! curp={}".format(curp),"text","options"
         else:
             return "Por favor oprime primero en trámite","text","options"
