@@ -143,6 +143,8 @@ def generateTextFromIntent(intent_value):
         return "Tu opinión es importante para nosotros, gracias por ayudarnos a mejorar","options"
     if intent_value == "epn":
         return getLastEPNTweet(os.environ['AT'],os.environ['AT_S'],os.environ['CON'],os.environ['CON_S']),"options"
+    if intent_value == "elecciones":
+        return "Las elecciones presidenciales serán el 1ro de Julio de 2018","options"
     return "Oops, no te entendí","options"
 
 def generateAlternativeIntent(text):
