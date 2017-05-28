@@ -40,18 +40,13 @@ router.route('/ine/:facebookID')
             res.send({'code': 1, 'message': data});
         }
 
-        User.find({'facebookID': req.params.facebookID}).sort('-_id').exec(function(err, user) {
+        User.findOne({'facebookID': req.params.facebookID}, function(err, user) {
             if (err) {
                 console.log("ERROR: " + err);
                 return;
             }
             Ine.find({'user': user['_id'].toString()}).sort('-timestamp').exec(function(err, messages) {
-                if (messages) {
-                    callback(messages[0]);
-                }
-                else {
-                    callback(null);
-                }
+                callback(messages);
             });
         });
     })
