@@ -88,12 +88,12 @@ def sendIne2DB(sender,_url):
     image_text    = getImageText(_url)    
     post_url = "http://35.162.69.59:8080/api/ine" 
     ine = {"facebookID":str(sender),
-           "fName":"",
+           "fName":"None",
            "mName":str(facebook_data.get("last_name")),
-           "lName":"",
-           "Address":"",
-           "ineID":"",
-           "curp":""}
+           "lName":"None",
+           "Address":"None",
+           "ineID":"None",
+           "curp":"None"}
     try:
         r = requests.post(post_url,data=ine)
         print(r.text)
