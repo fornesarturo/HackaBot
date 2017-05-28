@@ -82,7 +82,12 @@ def generateQuickReplies(quick_type):
                 "content_type":"text",
                 "title":"Help",
                 "payload":"PAYLOAD_HELP"
-             }
+             },
+             {
+                 "content_type":"text",
+                 "title":"Trámite",
+                 "payload":"PAYLOAD_TRAMITE"
+              }
         ]
     if quick_type == 'welcome':
         return [
