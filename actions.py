@@ -1,6 +1,6 @@
 from other_functions import *
 
-def generateAnswer(text):
+def generateAnswer(text,sender):
     if "hola" in text.lower():
         return "Hola, gusto en hablar contigo, aunque en realidad esté hardcodeado","text","options"
     if "GET_STARTED_PAYLOAD" in text:
@@ -10,8 +10,18 @@ def generateAnswer(text):
     if "PAYLOAD_TRAMITE" in text or "trámite" in text.lower() or "tramite" in text.lower():
         return "Dame tu INE, anda, confía","text","options"
     if "PAYLOAD_RFC" in text or "rfc" in text.lower():
-        #check if user is registered, if yes the continues to search for RFC. If not ask to click on trámite
-        if (False):
+        r=requests.get("http://35.162.69.59:8080/api/ine/"+sender)
+        if (r is not None):
+            datamagic= json.dumps(r)
+            decoded = json.loads(datamagic)
+            nombre = str(decoded["message"]["fName"])
+            apellido_paterno = str(decoded["message"]["lName"])
+            apellido_materno = str(decoded["message"]["mName"])
+            curp = str(decoded["message"]["curp"])
+            year=curp[4]+curp[5]
+            mes=curp[6]+curp[7]
+            dia=curp[8]+curp[9]
+            fecha="19"+year+"/"+mes+"/"+dia
             urlapi = "https://jfhe88-rfc-generator-mexico.p.mashape.com/rest1/rfc/get?apellido_materno="+ apellido_materno + "&apellido_paterno="+apellido_paterno+"&fecha="+fecha+"&nombre="+nombre+"&solo_homoclave=0"
             response = unirest.get(urlapi,
                 headers={
@@ -42,7 +52,7 @@ class EntryManager(object):
                 sendMessage2DB(sender,text,timestamp)
                 if event['message'].get('quick_reply'):
                     payload = event['message']['quick_reply']['payload']
-                    answer,_type,quick_reply = generateAnswer(payload)
+                    answer,_type,quick_reply = generateAnswer(payload,sender)
                 elif not text:
                     attachment_type =  str(event['message']['attachments'][0]['type'])
                     if attachment_type == "image":
@@ -59,13 +69,13 @@ class EntryManager(object):
                     else:
                         answer,_type,quick_reply = 'Nice ' + str(event['message']['attachments'][0]['type']),'text','options'
                 else:
-                    answer,_type,quick_reply = generateAnswer(text)
+                    answer,_type,quick_reply = generateAnswer(text,sender)
                 if "text" in _type:
                     return {'sender':sender,'user_text':text,'text':answer,'type':_type,'quick':quick_reply}
             if event.get("postback"):
                 payload = event['postback']['payload']
                 sender = event['sender']['id']
-                answer,_type,quick_reply = generateAnswer(payload)
+                answer,_type,quick_reply = generateAnswer(payload,sender)
                 return {'sender':sender,'user_text':payload,'text':answer,'type':_type,'quick':quick_reply}
         answer_list = map(getAnswer, self.message_list)
         return answer_list
