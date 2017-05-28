@@ -7,7 +7,9 @@ def generateAnswer(text):
         return "Hola, soy un Bot que procesa tus tramites, para proseguir haz click en algún botón o envía un mensaje","text","welcome"
     if "PAYLOAD_HELP" in text:
         return "Hola, soy un Bot que procesa tus tramites, para proseguir haz click en algún botón o envía un mensaje","text","welcome"
-    return "Dame tu INE, anda, confía","text","options"
+    if "PAYLOAD_TRAMITE" in text:
+        return "Dame tu INE, anda, confía","text","options"
+    return "Oops, no te entendí","text","options"
 
 class EntryManager(object):
     def __init__(self,entry):
