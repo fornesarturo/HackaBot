@@ -78,6 +78,7 @@ def isThisAnINE(img_url):
     # add request to azure
     identify_url = "http://gerardo8170.cloudapp.net:8080/identifyIne"
     _data = {"img":img_url}
+    log(img_url)
     r = requests.get(identify_url,json=_data)
     return eval(r.text)
 
