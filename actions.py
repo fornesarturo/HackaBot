@@ -18,6 +18,7 @@ def generateAnswer(text,sender):
             apellido_paterno = str(decoded["message"]["lName"])
             apellido_materno = str(decoded["message"]["mName"])
             curp = str(decoded["message"]["curp"])
+            log(curp)
             year=curp[4]+curp[5]
             mes=curp[6]+curp[7]
             dia=curp[8]+curp[9]
