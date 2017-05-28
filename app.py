@@ -104,13 +104,8 @@ def log(text):
     sys.stdout.flush()
 
 def send(request, response):
-     """
-    Sender function
-    """
-    # We use the fb_id as equal to session_id
     fb_id = request['session_id']
     text = response['text']
-    # send message
     fb_message(fb_id, text)
 
 # Setup Actions
@@ -120,3 +115,6 @@ actions = {
 
 # Setup Wit Client
 client = Wit(access_token=WIT_TOKEN, actions=actions)
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8080)
