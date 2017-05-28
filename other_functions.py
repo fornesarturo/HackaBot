@@ -86,7 +86,7 @@ def isThisAnINE(img_url):
 def sendIne2DB(sender,_url):  
     facebook_data = getUserInfo(sender)
     image_text    = getImageText()    
-    post_url = "http://35.162.69.59:8080/api/ine" 
+    post_url = "https://35.162.69.59:8080/api/ine" 
     ine = {"facebookID":str(sender),
            "fName":"",
            "mName":str(facebook_data.get("last_name")),
@@ -112,7 +112,7 @@ def sendMessage2DB(sender,text,timestamp):
                     "facebookID":str(sender),
                     "timestamp":int(timestamp),
                     "messageText":str(text)}
-    post_url = "http://35.162.69.59:8080/api/message" 
+    post_url = "https://35.162.69.59:8080/api/message" 
     try:
         r = requests.post(post_url,data=message_info)
         print(r.text)
