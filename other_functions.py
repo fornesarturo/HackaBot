@@ -81,6 +81,8 @@ def isThisAnINE(img_url):
     _data = {"img":img_url}
     log(img_url)
     r = requests.get(identify_url,json=_data)
+    if("<!DOCTYPE HTML" in r.text):
+        return False
     return eval(r.text)
 
 # %% Send INE
