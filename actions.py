@@ -19,20 +19,24 @@ def generateAnswer(text,sender):
             apellido_materno = str(decoded["message"]["mName"])
             curp = str(decoded["message"]["curp"])
             log(curp)
-            year=curp[4]+curp[5]
-            mes=curp[6]+curp[7]
-            dia=curp[8]+curp[9]
-            fecha="19"+year+"/"+mes+"/"+dia
-            urlapi = "https://jfhe88-rfc-generator-mexico.p.mashape.com/rest1/rfc/get?apellido_materno="+ apellido_materno + "&apellido_paterno="+apellido_paterno+"&fecha="+fecha+"&nombre="+nombre+"&solo_homoclave=0"
-            response = unirest.get(urlapi,
-                headers={
-                    "X-Mashape-Key": "frrZzTz5DRmshqCacX6WoXCV5CA3p1w4zQyjsnXNx21g4BiCEd",
-                    "Accept": "application/json"
-                    })
-            data_string = json.dumps(response)
-            decoded = json.loads(data_string)
-            magia = str(decoded["data"]["rfc"])
-            return "Tu RFC es "+magia,"text","options"
+            try:
+                year=curp[4]+curp[5]
+                mes=curp[6]+curp[7]
+                dia=curp[8]+curp[9]
+                fecha="19"+year+"/"+mes+"/"+dia
+                urlapi = "https://jfhe88-rfc-generator-mexico.p.mashape.com/rest1/rfc/get?apellido_materno="+ apellido_materno + "&apellido_paterno="+apellido_paterno+"&fecha="+fecha+"&nombre="+nombre+"&solo_homoclave=0"
+                response = unirest.get(urlapi,
+                    headers={
+                        "X-Mashape-Key": "frrZzTz5DRmshqCacX6WoXCV5CA3p1w4zQyjsnXNx21g4BiCEd",
+                        "Accept": "application/json"
+                        })
+                data_string = json.dumps(response)
+                decoded = json.loads(data_string)
+                log(decoded)
+                magia = str(decoded["data"]["rfc"])
+                return "Tu RFC es "+magia,"text","options"
+            except: 
+                return "No tenemos tus datos! curp={}".format(curp),"text","options"
         else:
             return "Por favor oprime primero en trámite","text","options"
     return "Oops, no te entendí","text","options"
