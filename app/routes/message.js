@@ -66,10 +66,10 @@ router.route('/message/:facebookID')
                 console.log("ERROR: " + err);
                 return;
             }
-            console.log(user);
             Message.find({'user': user['_id'].toString()}).sort('-timestamp').exec(function(err, messages) {
                 callback(messages[0]);
             });
         })
     })
+    
 module.exports = router;
