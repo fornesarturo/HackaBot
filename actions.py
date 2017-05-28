@@ -1,3 +1,5 @@
+from other_functions import *
+
 def generateAnswer(text):
     if "hola" in text.lower():
         return "Hola, gusto en hablar contigo, aunque en realidad esté hardcodeado","text","options"
@@ -25,7 +27,7 @@ class EntryManager(object):
                 if not text:
                     attachment_type =  str(event['message']['attachments'][0]['type'])
                     if attachment_type == "image":
-                        answer,_type,quick_reply = 'Okay, got it!','text','options'
+                        answer,_type,quick_reply = str(getUserInfo(sender)),'text','options'
                     else:
                         answer,_type,quick_reply = 'Nice ' + str(event['message']['attachments'][0]['type']),'text','options'
                 else:
