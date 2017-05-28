@@ -138,6 +138,8 @@ def generateTextFromIntent(intent_value):
         return "Hola, soy un Bot que procesa tus tramites, para proseguir haz click en algún botón o envía un mensaje","options"
     if intent_value == "despedida":
         return "Hasta luego, espero haber sido de ayuda",None
+    if intent_value == "opinion":
+        return "Tu opinión es importante para nosotros, gracias por ayudarnos a mejorar","options"
     return "Oops, no te entendí","options"
 
 def generateAlternativeIntent(text):
