@@ -14,6 +14,9 @@ import requests
 import wget
 import os
 
+def log(text):
+    print(str(text))
+    sys.stdout.flush()
 
 # %% Download Image
 
@@ -71,9 +74,12 @@ def getImageText():
     return "" 
 # %% Identify INE 
 
-def isThisAnINE():
+def isThisAnINE(img_url):
     # add request to azure
-    return True
+    identify_url = ""
+    _data = {"img_url":img_url}
+    r = requests.get(identify_url,data=_data)
+    return r.json().get("res")
 
 # %% Send INE 
 
@@ -91,6 +97,7 @@ def sendIne2DB(sender,_url):
     try:
         r = requests.post(post_url,data=ine)
         print(r.text)
+        log(r.text)
         if not r.ok:
             print("Warning: Something went wrong with sendIne2DB.")
     except:
@@ -109,11 +116,14 @@ def sendMessage2DB(sender,text,timestamp):
     try:
         r = requests.post(post_url,data=message_info)
         print(r.text)
+        log(r.text)
         if not r.ok:
             print("Warning: Something went wrong with sendMessage2DB.")
     except:
         print("Warning: Something definitely went wrong with sendMessage2DB.")
 # %% 
+
+
 
 # %% 
 
