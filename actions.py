@@ -10,8 +10,18 @@ def generateAnswer(text):
     if "PAYLOAD_TRAMITE" in text or "trámite" in text.lower() or "tramite" in text.lower():
         return "Dame tu INE, anda, confía","text","options"
     if "PAYLOAD_RFC" in text or "rfc" in text.lower():
-        #check if user is registered, if yes the continues to search for RFC. If not ask to click on trámite
-        if (False):
+        r=requests.get("http://35.162.69.59:8080/api/ine/"+sender)
+        if (r is not None):
+            datamagic= json.dumps(r)
+            decoded = json.loads(datamagic)
+            nombre = str(decoded["message"]["fName"])
+            apellido_paterno = str(decoded["message"]["lName"])
+            apellido_materno = str(decoded["message"]["mName"])
+            curp = str(decoded["message"]["curp"])
+            año=str(año[04])+str(año[05])
+            mes=str(año[06])+str(año[07])
+            dia=str(año[08])+str(año[09])
+            fecha="19"+año+"/"+mes+"/"+dia
             urlapi = "https://jfhe88-rfc-generator-mexico.p.mashape.com/rest1/rfc/get?apellido_materno="+ apellido_materno + "&apellido_paterno="+apellido_paterno+"&fecha="+fecha+"&nombre="+nombre+"&solo_homoclave=0"
             response = unirest.get(urlapi,
                 headers={
