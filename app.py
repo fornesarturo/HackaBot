@@ -48,6 +48,9 @@ def callback():
                             intent_value = generateAlternativeIntent(text)
                             result_list = list(map(answer, EM.answerEntry()))
                         #fb_message(sender,intent_value)
+                    elif message["message"].get("attachments"):
+                        EM = EntryManager(entry)
+                        result_list = list(map(answer, EM.answerEntry()))
                     continue
                 elif message.get("postback"):
                     EM = EntryManager(entry)
