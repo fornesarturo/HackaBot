@@ -2,7 +2,10 @@ import json
 import os
 import sys
 import requests
+from wit import Wit
 from flask import Flask, request, render_template, send_file
+
+WIT_TOKEN = "VGEJZPAKEAJX4C5QEZA64Z4MOAUG6IHO"
 
 from actions import *
 
@@ -26,6 +29,18 @@ def callback():
     log(data)
     if data["object"] == "page":
         for entry in data["entry"]:
+            messages = entry["messaging"]
+            for message in messages:
+                if message.get("message"):
+                    if message["message"].get("quick_reply"):
+                        EM = EntryManager(entry)
+                        result_list = list(map(answer, EM.answerEntry()))
+                        continue
+                    elif message["message"].get("text"):
+                        text = message["message"]["text"]
+                        sender = message["sender"]["id"]
+                        client.run_actions(session_id=sender,message=text)
+                        continue
             EM = EntryManager(entry)
             result_list = list(map(answer, EM.answerEntry()))
     return "OK", 200
@@ -40,6 +55,16 @@ def answer(answer_details):
     if r.status_code != 200:
         print(r.status_code)
         print(r.text)
+
+def fb_message(sender_id, text):
+    params  = {"access_token": os.environ["PAT"]}
+    headers = {"Content-Type": "application/json"}
+    data = {
+        'recipient': {'id': sender_id},
+        'message': {'text': text}
+    }
+    resp = requests.post("https://graph.facebook.com/v2.6/me/messages",params=params,headers=headers,json=data)
+    return resp.content
 
 def generateQuickReplies(quick_type):
     if quick_type == 'options':
@@ -77,3 +102,21 @@ def JSONify(answer_details):
 def log(text):
     print(str(text))
     sys.stdout.flush()
+
+def send(request, response):
+     """
+    Sender function
+    """
+    # We use the fb_id as equal to session_id
+    fb_id = request['session_id']
+    text = response['text']
+    # send message
+    fb_message(fb_id, text)
+
+# Setup Actions
+actions = {
+    'send': send
+}
+
+# Setup Wit Client
+client = Wit(access_token=WIT_TOKEN, actions=actions)
