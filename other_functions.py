@@ -9,6 +9,7 @@ Created on Sat May 27 19:42:14 2017
 # %% Imports 
 
 from PIL import Image
+import numpy as np
 import requests
 import wget
 import os
@@ -46,6 +47,13 @@ def getImage(img_url):
     image_filename = downloadImage(img_url)
     im = openImage(image_filename)
     return im
+
+# %% Image as bytes 
+
+def getNumpyImage(image_filename):
+    im = getImage(img_url)
+    array = np.array(im)
+    return array
 
 # %% User Info 
 def getUserInfo(sender):
