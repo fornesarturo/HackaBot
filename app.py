@@ -41,7 +41,8 @@ def callback():
                         sender = message["sender"]["id"]
                         resp = client.message(text)
                         log('Yay, got Wit.ai response: ' + str(resp))
-                        fb_message(sender,text)
+                        intent_value = resp['entities']['intent'][0]['value']
+                        fb_message(sender,intent_value)
                         continue
             EM = EntryManager(entry)
             result_list = list(map(answer, EM.answerEntry()))
@@ -58,7 +59,8 @@ def answer(answer_details):
         print(r.status_code)
         print(r.text)
 
-def fb_message(sender_id, text):
+def fb_message(sender_id, intent_value):
+    text = intent_value
     params  = {"access_token": os.environ["PAT"]}
     headers = {"Content-Type": "application/json"}
     data = {
