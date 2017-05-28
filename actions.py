@@ -25,7 +25,7 @@ def generateAnswer(text,sender):
                 dia=curp[8]+curp[9]
                 fecha="19"+year+"/"+mes+"/"+dia
                 urlapi = "https://jfhe88-rfc-generator-mexico.p.mashape.com/rest1/rfc/get?apellido_materno="+ apellido_materno + "&apellido_paterno="+apellido_paterno+"&fecha="+fecha+"&nombre="+nombre+"&solo_homoclave=0"
-                response = unirest.get(urlapi,
+                response = requests.get(urlapi,
                     headers={
                         "X-Mashape-Key": "frrZzTz5DRmshqCacX6WoXCV5CA3p1w4zQyjsnXNx21g4BiCEd",
                         "Accept": "application/json"
