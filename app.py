@@ -59,13 +59,14 @@ def answer(answer_details):
         print(r.text)
 
 def fb_message(sender_id, intent_value):
-    text = intent_value
+    text,quick_reply = generateTextFromIntent(intent_value)
     params  = {"access_token": os.environ["PAT"]}
     headers = {"Content-Type": "application/json"}
     data = {
         'recipient': {'id': sender_id},
         'message': {'text': text}
     }
+    data['message']['quick_replies'] = generateQuickReplies(_quick)
     resp = requests.post("https://graph.facebook.com/v2.6/me/messages",params=params,headers=headers,json=data)
     return resp.content
 
@@ -108,6 +109,10 @@ def log(text):
 
 # Setup Wit Client
 client = Wit(access_token=WIT_TOKEN)
+
+def generateTextFromIntent(intent_value):
+    if intent_value == "saludo":
+        return "Hola, soy un Bot que procesa tus tramites, para proseguir haz click en algún botón o envía un mensaje","options"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
