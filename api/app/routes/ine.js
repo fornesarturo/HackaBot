@@ -40,7 +40,7 @@ router.route('/ine/:facebookID')
             res.send({'code': 1, 'message': data});
         }
 
-        User.findOne({'facebookID': req.params.facebookID}).sort('-_id').exec(function(err, user) {
+        User.find({'facebookID': req.params.facebookID}).sort('-_id').exec(function(err, user) {
             if (err) {
                 console.log("ERROR: " + err);
                 return;
