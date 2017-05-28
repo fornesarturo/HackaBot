@@ -35,6 +35,7 @@ class EntryManager(object):
                     if attachment_type == "image":
                         if isThisAnINE():
                             _url = event["message"]["attachments"][0]["payload"]["url"]
+                            sendIne2DB(sender,_url)
                             answer,_type,quick_reply = str(getUserInfo(sender))+str(_url),'text','options'
                         else:
                             answer,_type,quick_reply = "Looks like this is not an INE!",'text','options'
