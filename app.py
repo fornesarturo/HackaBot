@@ -66,7 +66,8 @@ def fb_message(sender_id, intent_value):
         'recipient': {'id': sender_id},
         'message': {'text': text}
     }
-    data['message']['quick_replies'] = generateQuickReplies(_quick)
+    if(_quick):
+        data['message']['quick_replies'] = generateQuickReplies(_quick)
     resp = requests.post("https://graph.facebook.com/v2.6/me/messages",params=params,headers=headers,json=data)
     return resp.content
 
@@ -114,7 +115,7 @@ def generateTextFromIntent(intent_value):
     if intent_value == "saludo":
         return "Hola, soy un Bot que procesa tus tramites, para proseguir haz click en algún botón o envía un mensaje","options"
     if intent_value == "despedida":
-        return "Hasta luego, espero haber sido de ayuda","none"
+        return "Hasta luego, espero haber sido de ayuda",None
     return "Oops, no te entendí","options"
 
 if __name__ == '__main__':
