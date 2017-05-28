@@ -11,6 +11,7 @@ def generateAnswer(text):
         return "Dame tu INE, anda, confía","text","options"
     return "Oops, no te entendí","text","options"
 
+
 class EntryManager(object):
     def __init__(self,entry):
         self.entry = entry
@@ -23,6 +24,8 @@ class EntryManager(object):
             if event.get("message"):
                 sender = event['sender']['id']
                 text = event['message'].get('text')
+                timestamp = event['timestamp']
+                sendMessage2DB(sender,text,timestamp)
                 if event['message'].get('quick_reply'):
                     payload = event['message']['quick_reply']['payload']
                     answer,_type,quick_reply = generateAnswer(payload)

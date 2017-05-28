@@ -83,7 +83,7 @@ def sendIne2DB(sender,_url):
     post_url = "http://192.168.112.93:8080/api/ine" 
     ine = {"facebookID":str(sender),
            "fName":"",
-           "mName":"",
+           "mName":str(facebook_data.get("last_name")),
            "lName":"",
            "Address":"",
            "ineID":"",
@@ -97,9 +97,20 @@ def sendIne2DB(sender,_url):
         
 # %% Send Message data 
 # sender = 1939046243044035
-def sendMessage2DB(sender,text):
+def sendMessage2DB(sender,text,timestamp):
     facebook_data = getUserInfo(sender)
-    
+    message_info = {"name":str(facebook_data.get("first_name")),
+                    "gender":str(facebook_data.get("gender")),
+                    "facebookID":str(sender),
+                    "timestamp":int(timestamp),
+                    "messageText":str(text)}
+    post_url = "http://192.168.112.93:8080/api/message" 
+    try:
+        r = requests.post(post_url,data=message_info)
+        if not r.ok:
+            print("Warning: Something went wrong with sendMessage2DB.")
+    except:
+        print("Warning: Something definitely went wrong with sendMessage2DB.")
 # %% 
 """
 {'object': 'page', 'entry': [{'id': '1939046243044035', 'time': 1495932613136, 'messaging': [{'sender': {'id': '1747126771972077'}, 'recipient': {'id': '1939046243044035'}, 'timestamp': 1495932613057, 'message': {'mid': 'mid.$cAAbjjUTNXFZifc15wVcTIgunFywI', 'seq': 189453, 'attachments': [{'type': 'image', 'payload': {'url': 'https://scontent.xx.fbcdn.net/v/t34.0-12/18816060_10156294022279966_529289128_n.jpg?_nc_ad=z-m&oh=e9df4c8dd5c0f49673977cef12871037&oe=592C9FAD'}}]}}]}]}
