@@ -92,12 +92,15 @@ def getImageText(_url):
     text_url = "http://gerardo8170.cloudapp.net:8080/getText"
     _data = {"img":_url}
     log(text_url)
-    r = requests.get(text_url, params=_data)
-    if("<!DOCTYPE HTML" in r.text):
-        log("This was an error in request")
+    try:
+        r = requests.get(text_url, params=_data)
+        if("<!DOCTYPE HTML" in r.text):
+            log("This was an error in request")
+            return False
+        return r.text
+    except:
         return False
-    return r.text
-    
+
 
 # %% Send INE
 
