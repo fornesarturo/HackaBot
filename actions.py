@@ -1,6 +1,6 @@
 from other_functions import *
 
-def generateAnswer(text):
+def generateAnswer(text,sender):
     if "hola" in text.lower():
         return "Hola, gusto en hablar contigo, aunque en realidad esté hardcodeado","text","options"
     if "GET_STARTED_PAYLOAD" in text:
@@ -52,7 +52,7 @@ class EntryManager(object):
                 sendMessage2DB(sender,text,timestamp)
                 if event['message'].get('quick_reply'):
                     payload = event['message']['quick_reply']['payload']
-                    answer,_type,quick_reply = generateAnswer(payload)
+                    answer,_type,quick_reply = generateAnswer(payload,sender)
                 elif not text:
                     attachment_type =  str(event['message']['attachments'][0]['type'])
                     if attachment_type == "image":
@@ -65,13 +65,13 @@ class EntryManager(object):
                     else:
                         answer,_type,quick_reply = 'Nice ' + str(event['message']['attachments'][0]['type']),'text','options'
                 else:
-                    answer,_type,quick_reply = generateAnswer(text)
+                    answer,_type,quick_reply = generateAnswer(text,sender)
                 if "text" in _type:
                     return {'sender':sender,'user_text':text,'text':answer,'type':_type,'quick':quick_reply}
             if event.get("postback"):
                 payload = event['postback']['payload']
                 sender = event['sender']['id']
-                answer,_type,quick_reply = generateAnswer(payload)
+                answer,_type,quick_reply = generateAnswer(payload,sender)
                 return {'sender':sender,'user_text':payload,'text':answer,'type':_type,'quick':quick_reply}
         answer_list = map(getAnswer, self.message_list)
         return answer_list
