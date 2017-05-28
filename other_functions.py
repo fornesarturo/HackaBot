@@ -88,6 +88,7 @@ def isThisAnINE(img_url):
 # %% Image text
 def getImageText(_url):
     # add api to image test
+    # http://gerardo8170.cloudapp.net:8080/getText?img=https://i.imgur.com/puStRPW.jpg
     text_url = "http://gerardo8170.cloudapp.net:8080/getText"
     _data = {"img":_url}
     log(text_url)
