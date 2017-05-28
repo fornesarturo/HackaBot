@@ -61,7 +61,7 @@ def getNumpyImage(image_filename):
 def getUserInfo(sender):
     pat = 'EAAEY4sHIr4cBACBhvZBLYb03gnnl9bXriwZAfpeVXIfyToNIvXMr8v3zPnSC1OS9tBBe6SNZCOdHZCg1DZA3c3yBJRKhrZBnZBH3thGHW1XQeWdEeOJwZCtDZCp4O4zXbZCAMTW912O5ZCzOl7eyw2oLDiF1Q8fRXnB43AY4vbqvHM4sQZDZD'
     #pat = os.environ["PAT"]
-    userprofile_api = 'https://graph.facebook.com/v2.6/{USER_ID}?fields=first_name,profile_pic,gender&access_token={PAGE_ACCESS_TOKEN}'
+    userprofile_api = 'https://graph.facebook.com/v2.6/{USER_ID}?fields=first_name,last_name,profile_pic,gender&access_token={PAGE_ACCESS_TOKEN}'
     temp = eval(requests.get(userprofile_api.format(USER_ID=sender,PAGE_ACCESS_TOKEN=pat)).text)
     return temp
 
