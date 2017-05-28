@@ -59,7 +59,7 @@ def answer(answer_details):
         print(r.text)
 
 def fb_message(sender_id, intent_value):
-    text,quick_reply = generateTextFromIntent(intent_value)
+    text,_quick = generateTextFromIntent(intent_value)
     params  = {"access_token": os.environ["PAT"]}
     headers = {"Content-Type": "application/json"}
     data = {
