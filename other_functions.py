@@ -46,12 +46,14 @@ def getImage(img_url):
     # returns the image (bytes)
     image_filename = downloadImage(img_url)
     im = openImage(image_filename)
+    os.remove(image_filename)
     return im
 
 # %% Image as bytes 
 
 def getNumpyImage(image_filename):
     im = getImage(img_url)
+    os.remove(image_filename)
     array = np.array(im)
     return array
 
