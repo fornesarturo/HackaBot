@@ -39,7 +39,6 @@ class EntryManager(object):
                 sender = event['sender']['id']
                 text = event['message'].get('text')
                 timestamp = event['timestamp']
-                print("------------------ THIS 0 ------------------")
                 sendMessage2DB(sender,text,timestamp)
                 if event['message'].get('quick_reply'):
                     payload = event['message']['quick_reply']['payload']
@@ -65,7 +64,6 @@ class EntryManager(object):
                 answer,_type,quick_reply = generateAnswer(payload)
                 return {'sender':sender,'user_text':payload,'text':answer,'type':_type,'quick':quick_reply}
         answer_list = map(getAnswer, self.message_list)
-        print("------------------ THIS 1 ------------------")
         return answer_list
 
 def log(text):
