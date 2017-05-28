@@ -81,7 +81,7 @@ def isThisAnINE(img_url):
     identify_url = "http://gerardo8170.cloudapp.net:8080/identifyIne"
     _data = {"img":img_url}
     log(img_url)
-    r = requests.get(identify_url + "?img=" + img_url)
+    r = requests.get(identify_url, params=_data)
     if("<!DOCTYPE HTML" in r.text):
         log("This was an error in request")
         return False
