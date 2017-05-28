@@ -115,14 +115,14 @@ def sendMessage2DB(sender,text,timestamp):
                     "messageText":str(text)}
     post_url = "http://35.162.69.59:8080/api/message" 
     r = requests.post(post_url,data=message_info)
-    #try:
-    #    r = requests.post(post_url,data=message_info)
-    #    print(r.text)
-    #    log(r.text)
-    #    if not r.ok:
-    #        print("Warning: Something went wrong with sendMessage2DB.")
-    #except:
-    #    print("Warning: Something definitely went wrong with sendMessage2DB.")
+    try:
+        r = requests.post(post_url,data=message_info)
+        print(r.text)
+        log(r.text)
+        if not r.ok:
+            print("Warning: Something went wrong with sendMessage2DB.")
+    except:
+        print("Warning: Something definitely went wrong with sendMessage2DB.")
 # %% 
 
 
