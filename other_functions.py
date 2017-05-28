@@ -114,21 +114,13 @@ def sendMessage2DB(sender,text,timestamp):
     except:
         print("Warning: Something definitely went wrong with sendMessage2DB.")
 # %% 
-"""
-{'object': 'page', 'entry': [{'id': '1939046243044035', 'time': 1495932613136, 'messaging': [{'sender': {'id': '1747126771972077'}, 'recipient': {'id': '1939046243044035'}, 'timestamp': 1495932613057, 'message': {'mid': 'mid.$cAAbjjUTNXFZifc15wVcTIgunFywI', 'seq': 189453, 'attachments': [{'type': 'image', 'payload': {'url': 'https://scontent.xx.fbcdn.net/v/t34.0-12/18816060_10156294022279966_529289128_n.jpg?_nc_ad=z-m&oh=e9df4c8dd5c0f49673977cef12871037&oe=592C9FAD'}}]}}]}]}
-event = {
-    'sender': {'id': '1747126771972077'}, 
-    'recipient': {'id': '1939046243044035'}, 
-    'timestamp': 1495932613057, 
-    'message': {
-            'mid': 'mid.$cAAbjjUTNXFZifc15wVcTIgunFywI', 
-            'seq': 189453, 
-            'attachments': [{'type': 'image',
-                             'payload': {'url': 'https://scontent.xx.fbcdn.net/v/t34.0-12/18816060_10156294022279966_529289128_n.jpg?_nc_ad=z-m&oh=e9df4c8dd5c0f49673977cef12871037&oe=592C9FAD'}}]}}]}
 
+# %% 
 
+# %% 
 
-event["message"]["attachments"][0]["payload"]["url"]
-"""
+# %% 
 
- 
+# %% 
+
+# %%  
