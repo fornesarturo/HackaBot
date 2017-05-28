@@ -13,6 +13,7 @@ import numpy as np
 import requests
 import wget
 import os
+import sys
 
 def log(text):
     print(str(text))
