@@ -71,7 +71,7 @@ class EntryManager(object):
                                 img_text = ""
                             answer,_type,quick_reply = str(img_text)+"\n\n"+str(getUserInfo(sender))+str(_url),'text','options'#str(getUserInfo(sender))+str(_url),'text','options'
                         else:
-                            answer,_type,quick_reply = "Hey, parece que esto no es una INE!,'text','options'
+                            answer,_type,quick_reply = "Hey, parece que esto no es una INE!','text','options'
                     else:
                         answer,_type,quick_reply = 'Nice ' + str(event['message']['attachments'][0]['type']),'text','options'
                 else:
