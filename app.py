@@ -8,6 +8,7 @@ from flask import Flask, request, render_template, send_file
 WIT_TOKEN = "VGEJZPAKEAJX4C5QEZA64Z4MOAUG6IHO"
 
 from actions import *
+from penaTweet import *
 
 app = Flask(__name__)
 
@@ -140,6 +141,8 @@ def generateTextFromIntent(intent_value):
         return "Hasta luego, espero haber sido de ayuda",None
     if intent_value == "opinion":
         return "Tu opinión es importante para nosotros, gracias por ayudarnos a mejorar","options"
+    if intent_value == "epn":
+        return getLastEPNTweet(os.environ['AT'],os.environ['AT_S'],os.environ['CON'],os.environ['CON_S']),"options"
     return "Oops, no te entendí","options"
 
 def generateAlternativeIntent(text):
