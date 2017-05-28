@@ -44,6 +44,7 @@ def callback():
                         intent_value = resp['entities']['intent'][0]['value']
                         fb_message(sender,intent_value)
                         continue
+                    continue
             EM = EntryManager(entry)
             result_list = list(map(answer, EM.answerEntry()))
     return "OK", 200
