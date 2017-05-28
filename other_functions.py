@@ -79,7 +79,7 @@ def isThisAnINE(img_url):
     identify_url = ""
     _data = {"img_url":img_url}
     r = requests.get(identify_url,data=_data)
-    return r.json().get("res")
+    return True#r.json().get("res")
 
 # %% Send INE 
 
