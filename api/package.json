@@ -1,0 +1,19 @@
+{
+  "name": "hackabot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fornesarturo/HackaBot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fornesarturo/HackaBot/issues"
+  },
+  "homepage": "https://github.com/fornesarturo/HackaBot#readme"
+}
