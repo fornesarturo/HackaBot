@@ -113,6 +113,8 @@ client = Wit(access_token=WIT_TOKEN)
 def generateTextFromIntent(intent_value):
     if intent_value == "saludo":
         return "Hola, soy un Bot que procesa tus tramites, para proseguir haz click en algún botón o envía un mensaje","options"
+    if intent_value == "despedida":
+        return "Hasta luego, espero haber sido de ayuda","none"
     return "Oops, no te entendí","options"
 
 if __name__ == '__main__':
