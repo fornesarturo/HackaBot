@@ -11,7 +11,7 @@ MarkupSafe==1.0
 numpy==1.12.1
 olefile==0.44
 packaging==16.8
-Pillow==4.1.1
+Pillow==8.3.2
 pyparsing==2.2.0
 requests==2.16.2
 six==1.10.0
